@@ -4,10 +4,21 @@ from discord import app_commands
 from datetime import datetime, time, timedelta
 import json
 import pytz
+import configparser
+import argparse
+
+#Argument parser
+parser= argparse.ArgumentParser("Scheduler.py")
+parser.add_argument("conf_file", help="Configuration file path to be used to customize execution.")
+args = parser.parse_args()
+
+#config parser, read in configuration argument named conf_file (first argument)
+config=configparser.ConfigParser()
+config.read(args.conf_file)
 
 # Bot configuration
-TOKEN = 'TOKEN_GOES_HERE'  # Replace with your bot token
-TIMEZONE = 'EST'  # Change this to your timezone
+TOKEN = config['private']['token']  # Replace with your bot token
+TIMEZONE = 'US/Pacific'  # Change this to your timezone
 
 # Define intents
 intents = discord.Intents.default()  # Enable default intents
